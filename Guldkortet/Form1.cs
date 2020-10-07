@@ -136,20 +136,20 @@ namespace Guldkortet
                     switch (Reward)
                     {
                         case "Dunderkatt":
-                            Dunderkatt<string> Dund = new Dunderkatt<string>(CardNumber);
-                            cardInfo.Add(Dund);
+                            Dunderkatt<string> Dunderkatt = new Dunderkatt<string>(CardNumber);
+                            cardInfo.Add(Dunderkatt);
                             break;
                         case "Kristallhäst":
-                            Kristallhäst<string> Krist = new Kristallhäst<string>(CardNumber);
-                            cardInfo.Add(Krist);
+                            Kristallhäst<string> Kristallhäst = new Kristallhäst<string>(CardNumber);
+                            cardInfo.Add(Kristallhäst);
                             break;
                         case "Överpanda":
-                            Överpanda<string> över = new Överpanda<string>(CardNumber);
-                            cardInfo.Add(över);
+                            Överpanda<string> Överpanda = new Överpanda<string>(CardNumber);
+                            cardInfo.Add(Överpanda);
                             break;
                         case "Eldtomat":
-                            Eldtomat<string> Eldto = new Eldtomat<string>(CardNumber);
-                            cardInfo.Add(Eldto);
+                            Eldtomat<string> Eldtomat = new Eldtomat<string>(CardNumber);
+                            cardInfo.Add(Eldtomat);
                             break;
 
                     }
@@ -161,14 +161,12 @@ namespace Guldkortet
             {
                 //in case of error
                 MessageBox.Show("Textfilen hittades inte");
-
             }
         }
 
         // This button is responsible for connecting to the server
         private void button1_Click(object sender, EventArgs e)
         {
-
             try
             {
                 //The IP address that the client should connect
@@ -192,18 +190,13 @@ namespace Guldkortet
                 button1.Text = "Inte ansluten";
                 return;
             }
-
-
-
         }
 
         // This button is responsible for check the prize
         private async void button2_Click(object sender, EventArgs e)
         {
-           
             try
             {
-
                 //Check if the client is connected so we can send the message
                 if (client.Connected)
                 {
@@ -230,7 +223,6 @@ namespace Guldkortet
                                 //Two pictures will pop up when the user wins a prize the first is the same for all prizes, the second is unique according to the prize
                                 pictureBox2.Load(Application.StartupPath + "\\Grafik\\grattis.png");
                                 pictureBox1.Load(Application.StartupPath + "\\Grafik\\" + cardInfo[c].reward + ".png");
-
                             }
                         }
                     }
@@ -240,7 +232,7 @@ namespace Guldkortet
                     {
                         if (userInfo[i].serialNumber == vektore[0] && card == false)
                         {
-                            buffer = Encoding.Unicode.GetBytes(userInfo[i].ToString() + " ditt kodkort är inte rätt försök igen!");
+                            buffer = Encoding.Unicode.GetBytes(userInfo[i].ToString() + "Ditt kodkort är inte rätt försök igen!");
                             await client.GetStream().WriteAsync(buffer, 0, buffer.Length);
                             user = true;
                             card = false;
@@ -253,7 +245,7 @@ namespace Guldkortet
                     {
                         if (user == false && cardInfo[i].cardNumber == vektore[1])
                         {
-                            buffer = Encoding.Unicode.GetBytes(cardInfo[i].ToString() + " men du har inget konto hos oss!");
+                            buffer = Encoding.Unicode.GetBytes(cardInfo[i].ToString() + "Men du har inget konto hos oss!");
                             await client.GetStream().WriteAsync(buffer, 0, buffer.Length);
                             user = false;
                             card = true;
@@ -268,9 +260,6 @@ namespace Guldkortet
                         buffer = Encoding.Unicode.GetBytes("Kunden och kortet finns inte. Var god försök igen!");
                         await client.GetStream().WriteAsync(buffer, 0, buffer.Length);
                     }
-
-
-
                 }
             }
             catch
